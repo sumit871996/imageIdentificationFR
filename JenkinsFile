@@ -1,0 +1,19 @@
+pipeline {
+     agent {
+     label 'imageidentififr'
+     }
+
+    stage('Checkout') {
+        echo 'inside checkout'
+        git 'https://github.com/sumit871996/imageIdentificationFR.git'
+    }
+    
+    stage('docker build')
+    {
+        steps{
+        echo 'hii'
+        sh 'docker login'
+        }
+    }
+   
+}
