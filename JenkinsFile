@@ -5,7 +5,7 @@ pipeline {
 
     stage('Checkout') {
         echo 'inside checkout'
-        git 'https://github.com/sumit871996/imageIdentificationFR.git'
+        git branch: 'main', url: 'https://github.com/sumit871996/imageIdentificationFR.git'
     }
     
     stage('docker build')
