@@ -22,15 +22,8 @@ pipeline
           
           stage('Docker push') {
           steps{
-               withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
-                    script {
-                        def dockerRegistry = 'dockerhub' 
-                        docker.withRegistry("https://${dockerRegistry}.com", "docker") 
-                        {
-                            docker.login(username: DOCKERHUB_CREDENTIALS_USR, password: DOCKERHUB_CREDENTIALS_PSW)
-                        }
-                    }
-               }  
+               sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        sh 'docker image push sumithpe/imageidentifront:latest' 
           }
           }
           
