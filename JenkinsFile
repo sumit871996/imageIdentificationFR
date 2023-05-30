@@ -13,9 +13,25 @@ pipeline
           stage('Docker build') {
           steps{
                sh 'docker image build -t sumithpe/imageidentifront .'
-               }
-               
+               }  
           }
+          
+          
+          stage('Docker push') {
+          steps{
+               withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    script {
+                        def dockerRegistry = 'dockerhub' 
+                        docker.withRegistry("https://${dockerRegistry}.com", "docker") 
+                        {
+                            docker.login(username: DOCKER_USERNAME, password: DOCKER_PASSWORD)
+                        }
+                    }
+               }  
+          }
+          }
+          
+          
           
           
           
