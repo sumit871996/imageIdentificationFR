@@ -27,7 +27,7 @@ pipeline
                         def dockerRegistry = 'dockerhub' 
                         docker.withRegistry("https://${dockerRegistry}.com", "docker") 
                         {
-                            docker.login(username: $DOCKERHUB_CREDENTIALS_USR, password: $DOCKERHUB_CREDENTIALS_PSW)
+                            docker.login(username: DOCKERHUB_CREDENTIALS_USR, password: DOCKERHUB_CREDENTIALS_PSW)
                         }
                     }
                }  
