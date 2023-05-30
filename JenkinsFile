@@ -4,7 +4,7 @@ pipeline
      label 'imageidentififr'
      }
      environment {     
-    DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')     
+    DOCKERHUB_CREDENTIALS= credentials('dockerhub_id')     
 } 
      stages{
          stage('Checkout') {
