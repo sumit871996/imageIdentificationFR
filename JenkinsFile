@@ -4,7 +4,9 @@ pipeline {
      }
 stages{
     stage('Checkout') {
+    steps{
         git 'https://github.com/sumit871996/imageIdentificationFR.git'
+        }
     }
     }
     
