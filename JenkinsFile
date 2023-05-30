@@ -11,9 +11,9 @@ pipeline
           }
           
           stage('Docker build') {
-          steps{
+          
                sh 'docker image build -f imageauthentifr/Dockerfile -t 'sumithpe/imageidentifront' imageauthentifr/'
-               }
+               
           }
           
           
