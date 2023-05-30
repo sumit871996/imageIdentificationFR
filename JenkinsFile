@@ -3,6 +3,9 @@ pipeline
      agent {
      label 'imageidentififr'
      }
+     environment {     
+    DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')     
+} 
      stages{
          stage('Checkout') {
           steps{
@@ -19,12 +22,12 @@ pipeline
           
           stage('Docker push') {
           steps{
-               withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+               withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: '$DOCKERHUB_CREDENTIALS_USR', passwordVariable: '$DOCKERHUB_CREDENTIALS_PSW')]) {
                     script {
                         def dockerRegistry = 'dockerhub' 
                         docker.withRegistry("https://${dockerRegistry}.com", "docker") 
                         {
-                            docker.login(username: DOCKER_USERNAME, password: DOCKER_PASSWORD)
+                            docker.login(username: $DOCKERHUB_CREDENTIALS_USR, password: $DOCKERHUB_CREDENTIALS_PSW)
                         }
                     }
                }  
