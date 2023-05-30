@@ -1,14 +1,24 @@
-pipeline {
+pipeline 
+{
      agent {
      label 'imageidentififr'
      }
-stages{
-    stage('Checkout') {
-    steps{
-        git 'https://github.com/sumit871996/imageIdentificationFR.git'
-        }
-    }
-    }
+     stages{
+         stage('Checkout') {
+          steps{
+               git 'https://github.com/sumit871996/imageIdentificationFR.git'
+               }
+          }
+          
+          stage('Docker build') {
+          steps{
+               docker image build -f ./imageauthentifr/Dockerfile -t "sumithpe/imageidentifront" ./imageauthentifr
+               }
+          }
+          
+          
+          
+     }
     
    
 }
