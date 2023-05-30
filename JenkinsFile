@@ -4,7 +4,6 @@ pipeline {
      }
 
     stage('Checkout') {
-        echo 'inside checkout'
         git 'https://github.com/sumit871996/imageIdentificationFR.git'
     }
     
