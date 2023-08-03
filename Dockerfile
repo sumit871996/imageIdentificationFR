@@ -1,18 +1,12 @@
-# Fetching the latest node image on alpine linux
-FROM node:alpine AS development
+FROM node:14 as builder
+WORKDIR /usr/src/app
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . ./
+RUN yarn build
 
-# Declaring env
-ENV NODE_ENV development
-
-# Setting up the work directory
-WORKDIR /react-app
-
-# Installing dependencies
-COPY ./package.json /react-app
-RUN npm install
-
-# Copying all the files in our project
-COPY . .
-
-# Starting our application
-CMD npm start
+# Stage 2: Copy the JS React SPA into the Nginx HTML directory
+FROM bitnami/nginx:latest
+COPY --from=builder /usr/src/app/build /app
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
