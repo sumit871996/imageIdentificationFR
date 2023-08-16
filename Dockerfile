@@ -1,12 +1,15 @@
-FROM node:16 as builder
-WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-RUN yarn
-COPY . ./
-RUN yarn build
+FROM image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8
 
-# Stage 2: Copy the JS React SPA into the Nginx HTML directory
-FROM bitnami/nginx:latest
-COPY --from=builder /usr/src/app/build /app
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+LABEL "io.openshift.s2i.build.image"="image-registry.openshift-image-registry.svc:5000/openshift/nodejs:16-ubi8"       "io.openshift.s2i.build.source-location"="."
+
+USER root
+
+COPY upload/src /tmp/src
+
+RUN chown -R 1001:0 /tmp/src
+
+USER 1001
+
+RUN /usr/libexec/s2i/assemble
+
+CMD /usr/libexec/s2i/run
