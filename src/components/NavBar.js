@@ -27,7 +27,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Single
+                Single Image
               </NavLink>
             </li>
             <li className="nav-item">
@@ -38,7 +38,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Double
+                Double Images
               </NavLink>
             </li>
             <li className="nav-item">
@@ -49,7 +49,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Multiple
+                Multiple Images
               </NavLink>
             </li>
             <li className="nav-item">
