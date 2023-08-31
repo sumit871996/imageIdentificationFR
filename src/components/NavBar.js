@@ -27,7 +27,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={handleClick}
               >
-                Single Image
+                Single
               </NavLink>
             </li>
             <li className="nav-item">
